@@ -12,10 +12,11 @@ const router = require('./routes/user.routes');
 
 // Middleware
 app.use(express.json());
-app.use(cors({
-    origin: ['http://localhost:3000', 'https://demo-usc-crm.netlify.app', 'https://demo-usc-crm-soft.netlify.app']
-}
-));
+app.use(cors());
+// app.use(cors({
+//     origin: ['http://localhost:5500', 'https://demo-usc-crm.netlify.app', 'https://vercel.com/universeit137s-projects/uiti-crm-server']
+// }
+// ));
 
 // db connection
 mongoose.connect(process.env.DATABASE).then(() => {
