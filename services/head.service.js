@@ -1,13 +1,13 @@
-const Head = require("../models/head.model");
+const headModel = require("../models/head.model");
 
 exports.headAddService = async (leadInfo) => {
-    const head = await Head.create(leadInfo);
+    const head = await headModel.create(leadInfo);
     return head;
 }
 
 exports.getsAllService = async (document) => {
     try {
-        const heads = await Head.find(document);
+        const heads = await headModel.find(document);
         return heads
     }
     catch (err) {
@@ -18,7 +18,7 @@ exports.getsAllService = async (document) => {
 
 exports.getByDeleteId = async (id) => {
     try {
-        const user = await Head.findById(id);
+        const user = await headModel.findById(id);
         // // console.log(user);
         return user
     }
@@ -30,7 +30,7 @@ exports.getByDeleteId = async (id) => {
 
 exports.remove = async (id) => {
     try {
-        const lead = await Head.findByIdAndDelete(id);
+        const lead = await headModel.findByIdAndDelete(id);
         return lead
     }
     catch (err) {

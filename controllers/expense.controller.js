@@ -78,20 +78,20 @@ const updateExpenseById = async (req, res) => {
   }
 };
 
-const deleteUserById = async (req, res) => {
+const deleteExpenseById = async (req, res) => {
   try {
     const id = req.params.id;
 
     const exist = await getById(id);
     if (!exist) {
       return res.status(404).json({
-        message: "No user found!",
+        message: "No expense found!",
       });
     }
 
     const lead = await deleteById(id);
     res.status(200).json({
-      message: "User delete successful",
+      message: "expense delete successful",
       lead,
     });
   } catch (err) {
@@ -102,4 +102,4 @@ const deleteUserById = async (req, res) => {
   }
 };
 
-module.exports = { addExpense, getExpense, deleteUserById, updateExpenseById };
+module.exports = { addExpense, getExpense, deleteExpenseById, updateExpenseById };
