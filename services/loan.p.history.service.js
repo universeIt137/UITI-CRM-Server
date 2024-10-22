@@ -1,14 +1,14 @@
-const ReceiveLoan = require("../models/loan.p.history.model");
+const receiveLoanModel = require("../models/loan.p.history.model");
 
 
 exports.loanPayAddService = async (expenseInfo) => {
-    const loan = await ReceiveLoan.create(expenseInfo);
+    const loan = await receiveLoanModel.create(expenseInfo);
     return loan;
 }
 
 exports.getsAllService = async (document) => {
     try {
-        const loans = await ReceiveLoan.find(document).populate('loanId');
+        const loans = await receiveLoanModel.find(document).populate('loanId');
         return loans
     }
     catch (err) {
