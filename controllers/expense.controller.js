@@ -48,7 +48,7 @@ const getExpense = async (req, res) => {
   }
 };
 
-const updateUserById = async (req, res) => {
+const updateExpenseById = async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -56,7 +56,7 @@ const updateUserById = async (req, res) => {
     // console.log(exist);
     if (!exist) {
       return res.status(404).json({
-        message: "No user found!",
+        message: "No expense found!",
       });
     }
 
@@ -67,7 +67,7 @@ const updateUserById = async (req, res) => {
     const lead = await UpdateById(id, update);
 
     res.status(200).json({
-      message: "User update successfully",
+      message: "expense update successfully",
       lead,
     });
   } catch (err) {
@@ -102,4 +102,4 @@ const deleteUserById = async (req, res) => {
   }
 };
 
-module.exports = { addExpense, getExpense, deleteUserById, updateUserById };
+module.exports = { addExpense, getExpense, deleteUserById, updateExpenseById };

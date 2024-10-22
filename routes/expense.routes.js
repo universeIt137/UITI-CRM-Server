@@ -3,7 +3,7 @@ const {
   addExpense,
   getExpense,
   deleteUserById,
-  updateUserById,
+  updateExpenseById,
 } = require("../controllers/expense.controller");
 const router = express.Router();
 const verifyAccessToken = require("../middleware/user.middleware");
@@ -12,7 +12,7 @@ router.post("/expense", verifyAccessToken, addExpense);
 
 router.get("/expense", getExpense);
 
-router.patch("/update-expense/:id", updateUserById);
+router.put("/update-expense/:id", updateExpenseById);
 
 router.delete("/delete-expense/:id", deleteUserById);
 
