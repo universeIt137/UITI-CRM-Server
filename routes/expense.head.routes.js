@@ -1,5 +1,5 @@
 const express = require('express');
-const { addExpenseHead, getExpenseHead, deleteUserById } = require('../controllers/expense.head');
+const { addExpenseHead, getExpenseHead, deleteExpenseHeadById } = require('../controllers/expense.head');
 const router = express.Router();
 const verifyAccessToken = require('../middleware/user.middleware')
 
@@ -11,6 +11,6 @@ router.get("/expense-head", getExpenseHead);
 
 // router.put("/update/:id", verifyAccessToken, updateUserById);
 
-router.delete("/delete-expense-head/:id", deleteUserById);
+router.delete("/delete-expense-head/:id", deleteExpenseHeadById);
 
 module.exports = router;

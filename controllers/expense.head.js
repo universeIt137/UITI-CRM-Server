@@ -3,9 +3,14 @@ const { expenseHeadAddService, getsAllService, getByDeleteId, remove } = require
 const addExpenseHead = async (req, res) => {
     try {
         // console.log(req.user);
-        if (req.user.role !== 'admin') {
+        // if (req.user.role !== 'admin') {
+        //     return res.status(403).send({ message: 'forbidden access' })
+        // }
+
+        if (req.headers.role !== 'admin') {
             return res.status(403).send({ message: 'forbidden access' })
         }
+
         // console.log(req.body)
         const expenseHead = await expenseHeadAddService(req.body);
 
@@ -39,7 +44,7 @@ const getExpenseHead = async (req, res) => {
     }
 }
 
-const deleteUserById = async (req, res) => {
+const deleteExpenseHeadById = async (req, res) => {
     try {
         const id = req.params.id;
 
@@ -52,7 +57,7 @@ const deleteUserById = async (req, res) => {
 
         const lead = await remove(id);
         res.status(200).json({
-            message: "User delete successful",
+            message: "expense head delete successful",
             lead
         })
     }
@@ -64,4 +69,4 @@ const deleteUserById = async (req, res) => {
     }
 }
 
-module.exports = { addExpenseHead, getExpenseHead, deleteUserById }
+module.exports = { addExpenseHead, getExpenseHead, deleteExpenseHeadById }

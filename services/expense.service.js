@@ -1,13 +1,13 @@
-const Expense = require("../models/expense.model");
+const expenseModel = require("../models/expense.model");
 
 exports.expenseAddService = async (expenseInfo) => {
-  const expense = await Expense.create(expenseInfo);
+  const expense = await expenseModel.create(expenseInfo);
   return expense;
 };
 
 exports.getsAllService = async (document) => {
   try {
-    const expenses = await Expense.find(document);
+    const expenses = await expenseModel.find(document);
     return expenses;
   } catch (err) {
     // console.log(err)
@@ -17,7 +17,7 @@ exports.getsAllService = async (document) => {
 
 exports.getById = async (id) => {
   try {
-    const user = await Expense.findById(id);
+    const user = await expenseModel.findById(id);
     return user;
   } catch (err) {
     // console.log(err)
@@ -30,7 +30,7 @@ exports.UpdateById = async (id, update) => {
     // console.log("update is called");
     // console.log(id);
     // console.log(update);
-    const user = await Expense.findOneAndUpdate({ _id: id }, update, {
+    const user = await expenseModel.findOneAndUpdate({ _id: id }, update, {
       new: true,
     });
     return user;
@@ -42,7 +42,7 @@ exports.UpdateById = async (id, update) => {
 
 exports.deleteById = async (id) => {
   try {
-    const lead = await Expense.findByIdAndDelete(id);
+    const lead = await expenseModel.findByIdAndDelete(id);
     return lead;
   } catch (err) {
     // console.log(err);

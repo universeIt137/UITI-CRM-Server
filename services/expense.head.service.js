@@ -1,13 +1,13 @@
-const ExpenseHead = require("../models/expense.head.model");
+const expenseHeadModel = require("../models/expense.head.model");
 
 exports.expenseHeadAddService = async (expenseHeadInfo) => {
-    const expenseHead = await ExpenseHead.create(expenseHeadInfo);
+    const expenseHead = await expenseHeadModel.create(expenseHeadInfo);
     return expenseHead;
 }
 
 exports.getsAllService = async (document) => {
     try {
-        const courses = await ExpenseHead.find(document);
+        const courses = await expenseHeadModel.find(document);
         return courses
     }
     catch (err) {
@@ -18,7 +18,7 @@ exports.getsAllService = async (document) => {
 
 exports.getByDeleteId = async (id) => {
     try {
-        const user = await ExpenseHead.findById(id);
+        const user = await expenseHeadModel.findById(id);
         // // console.log(user);
         return user
     }
@@ -30,7 +30,7 @@ exports.getByDeleteId = async (id) => {
 
 exports.remove = async (id) => {
     try {
-        const lead = await ExpenseHead.findByIdAndDelete(id);
+        const lead = await expenseHeadModel.findByIdAndDelete(id);
         return lead
     }
     catch (err) {
