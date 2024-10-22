@@ -3,7 +3,12 @@ const { loanHeadAddService, getsAllService, getByDeleteId, remove } = require('.
 const addLoanHead = async (req, res) => {
     try {
         // console.log(req.user);
-        if (req.user.role !== 'admin') {
+
+        // if (req.user.role !== 'admin') {
+        //     return res.status(403).send({ message: 'forbidden access' })
+        // }
+
+        if (req.headers.role !== 'admin') {
             return res.status(403).send({ message: 'forbidden access' })
         }
         // console.log(req.body)

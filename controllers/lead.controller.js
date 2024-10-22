@@ -1,7 +1,7 @@
-const Course = require("../models/course.model");
-const User = require("../models/user.model");
-const Batch = require("../models/batch.model");
-const Head = require("../models/head.model");
+const courseModel = require("../models/course.model");
+const userModel = require("../models/user.model");
+const batchModel = require("../models/batch.model");
+const headModel = require("../models/head.model");
 const {
   leadAddService,
   gets,
@@ -21,11 +21,11 @@ const addLeads = async (req, res) => {
     }
     const { leads, courseName, batchName, employeeName, headName } = req.body;
 
-    const courseDetails = await Course.findById(courseName);
-    const batchDetails = await Batch.findById(batchName);
-    const employeeDetails = await User.findById(employeeName);
-    // const headDetails = await Head.findById(headName);
-    const headDetails = await User.findById(headName);
+    const courseDetails = await courseModel.findById(courseName);
+    const batchDetails = await batchModel.findById(batchName);
+    const employeeDetails = await userModel.findById(employeeName);
+    // const headDetails = await headModel.findById(headName);
+    const headDetails = await userModel.findById(headName);
 
     // console.log(leads)
     const newLeadsArray = leads.map((lead) => {
@@ -117,6 +117,8 @@ const addLeads = async (req, res) => {
   }
 };
 
+
+
 const addOnlineLeads = async (req, res) => {
   try {
     if (req.user.role !== "admin") {
@@ -124,11 +126,11 @@ const addOnlineLeads = async (req, res) => {
     }
     const { leads, courseName, batchName, employeeName, headName } = req.body;
 
-    const courseDetails = await Course.findById(courseName);
-    const batchDetails = await Batch.findById(batchName);
-    const employeeDetails = await User.findById(employeeName);
-    // const headDetails = await Head.findById(headName);
-    const headDetails = await User.findById(headName);
+    const courseDetails = await courseModel.findById(courseName);
+    const batchDetails = await batchModel.findById(batchName);
+    const employeeDetails = await userModel.findById(employeeName);
+    // const headDetails = await headModel.findById(headName);
+    const headDetails = await userModel.findById(headName);
 
     // console.log(leads)
     const newLeadsArray = leads.map((lead) => {
@@ -200,6 +202,9 @@ const addOnlineLeads = async (req, res) => {
   }
 };
 
+
+
+
 const addOfflineLeads = async (req, res) => {
   try {
     if (req.user.role !== "admin") {
@@ -207,10 +212,10 @@ const addOfflineLeads = async (req, res) => {
     }
     const { leads, courseName, batchName, employeeName, headName } = req.body;
 
-    const courseDetails = await Course.findById(courseName);
-    const batchDetails = await Batch.findById(batchName);
-    const employeeDetails = await User.findById(employeeName);
-    const headDetails = await User.findById(headName);
+    const courseDetails = await courseModel.findById(courseName);
+    const batchDetails = await batchModel.findById(batchName);
+    const employeeDetails = await userModel.findById(employeeName);
+    const headDetails = await userModel.findById(headName);
 
     // console.log(leads)
     const newLeadsArray = leads.map((lead) => {
@@ -282,6 +287,9 @@ const addOfflineLeads = async (req, res) => {
   }
 };
 
+
+
+
 const addAdmissions = async (req, res) => {
   try {
     if (req.user.role !== "admin") {
@@ -315,10 +323,10 @@ const addAdmissions = async (req, res) => {
       headName,
     } = req.body;
 
-    const courseDetails = await Course.findById(courseName);
-    const batchDetails = await Batch.findById(batchName);
+    const courseDetails = await courseModel.findById(courseName);
+    const batchDetails = await batchModel.findById(batchName);
     const employeeDetails = await User.findById(employeeName);
-    // const headDetails = await Head.findById(headName);
+    // const headDetails = await headModel.findById(headName);
     const headDetails = await User.findById(headName);
 
     const lead = {
@@ -383,6 +391,10 @@ const addAdmissions = async (req, res) => {
   }
 };
 
+
+
+
+
 const getLeads = async (req, res) => {
   try {
     const query = req.query;
@@ -430,6 +442,9 @@ const getUserById = async (req, res) => {
   }
 };
 
+
+
+
 const updateLeadById = async (req, res) => {
   try {
     const id = req.params.id;
@@ -452,6 +467,8 @@ const updateLeadById = async (req, res) => {
     });
   }
 };
+
+
 
 const updateAddPayById = async (req, res) => {
   try {

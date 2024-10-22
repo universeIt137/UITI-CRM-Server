@@ -1,15 +1,15 @@
-const LoanHead = require("../models/loan.head.model");
+const loanHeadModel = require("../models/loan.head.model");
 
 
 
 exports.loanHeadAddService = async (loanHeadInfo) => {
-    const loanHead = await LoanHead.create(loanHeadInfo);
+    const loanHead = await loanHeadModel.create(loanHeadInfo);
     return loanHead;
 }
 
 exports.getsAllService = async (document) => {
     try {
-        const courses = await LoanHead.find(document);
+        const courses = await loanHeadModel.find(document);
         return courses
     }
     catch (err) {
@@ -20,7 +20,7 @@ exports.getsAllService = async (document) => {
 
 exports.getByDeleteId = async (id) => {
     try {
-        const user = await LoanHead.findById(id);
+        const user = await loanHeadModel.findById(id);
         // // console.log(user);
         return user
     }
@@ -32,7 +32,7 @@ exports.getByDeleteId = async (id) => {
 
 exports.remove = async (id) => {
     try {
-        const lead = await LoanHead.findByIdAndDelete(id);
+        const lead = await loanHeadModel.findByIdAndDelete(id);
         return lead
     }
     catch (err) {
