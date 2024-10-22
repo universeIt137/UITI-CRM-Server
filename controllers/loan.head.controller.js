@@ -44,14 +44,14 @@ const getLoanHead = async (req, res) => {
     }
 }
 
-const deleteUserById = async (req, res) => {
+const deleteLoanHeadById = async (req, res) => {
     try {
         const id = req.params.id;
 
         const exist = await getByDeleteId(id);
         if (!exist) {
             return res.status(404).json({
-                message: "No user found!",
+                message: "No loan head found!",
             })
         }
 
@@ -69,4 +69,4 @@ const deleteUserById = async (req, res) => {
     }
 }
 
-module.exports = { addLoanHead, getLoanHead, deleteUserById }
+module.exports = { addLoanHead, getLoanHead, deleteLoanHeadById }
