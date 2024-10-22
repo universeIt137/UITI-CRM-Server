@@ -1,13 +1,13 @@
-const Course = require("../models/course.model");
+const courseModel = require("../models/course.model");
 
 exports.courseAddService = async (leadInfo) => {
-    const course = await Course.create(leadInfo);
+    const course = await courseModel.create(leadInfo);
     return course;
 }
 
 exports.getsAllService = async (document) => {
     try {
-        const courses = await Course.find(document);
+        const courses = await courseModel.find(document);
         return courses
     }
     catch (err) {
@@ -18,7 +18,7 @@ exports.getsAllService = async (document) => {
 
 exports.getByDeleteId = async (id) => {
     try {
-        const user = await Course.findById(id);
+        const user = await courseModel.findById(id);
         // // console.log(user);
         return user
     }
@@ -30,7 +30,7 @@ exports.getByDeleteId = async (id) => {
 
 exports.remove = async (id) => {
     try {
-        const lead = await Course.findByIdAndDelete(id);
+        const lead = await courseModel.findByIdAndDelete(id);
         return lead
     }
     catch (err) {
