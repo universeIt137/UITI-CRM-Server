@@ -44,7 +44,7 @@ const getExpenseHead = async (req, res) => {
     }
 }
 
-const deleteUserById = async (req, res) => {
+const deleteExpenseHeadById = async (req, res) => {
     try {
         const id = req.params.id;
 
@@ -69,4 +69,4 @@ const deleteUserById = async (req, res) => {
     }
 }
 
-module.exports = { addExpenseHead, getExpenseHead, deleteUserById }
+module.exports = { addExpenseHead, getExpenseHead, deleteExpenseHeadById }
