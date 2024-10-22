@@ -43,7 +43,7 @@ studentSchema.index({ phone: 1 }, { unique: true });
 // })
 
 // studentSchema.methods.matchPassword = async function (enteredPassword) {
-//     // console.log(enteredPassword, this.password)
+    // console.log(enteredPassword, this.password)
 //     return await bcrypt.compare(enteredPassword, this.password);
 // }
 
@@ -52,11 +52,11 @@ studentSchema.index({ phone: 1 }, { unique: true });
 //         const accessToken = jwt.sign({ id: this._id }, process.env.ACCESS_TOKEN, {
 //             expiresIn: "1d"
 //         })
-//         // await new Token({ token: accessToken }).save();
+        // await new Token({ token: accessToken }).save();
 //         return accessToken;
 //     }
 //     catch (err) {
-//         // console.log(err);
+        // console.log(err);
 //         throw new Error(err.message)
 //     }
 // }
