@@ -57,7 +57,7 @@ const deleteExpenseHeadById = async (req, res) => {
 
         const lead = await remove(id);
         res.status(200).json({
-            message: "User delete successful",
+            message: "expense head delete successful",
             lead
         })
     }
