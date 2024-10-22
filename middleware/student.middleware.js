@@ -39,7 +39,7 @@ const User = require("../models/user.model");
 //     }
 // };
 
-const verifyAccessToken = async (req,res,next) => {
+const studentAccessToken = async (req,res,next) => {
     try {
         let token = req.headers.authorization;
         if (!token) {
@@ -47,13 +47,9 @@ const verifyAccessToken = async (req,res,next) => {
         }
         const decodeToken = jwt.verify(token, process.env.ACCESS_TOKEN);
 
-        const role = decodeToken.role;
-        const email = decodeToken.email;
-        const id = decodeToken.id;
+        const user = decodeToken.role;
 
-        req.headers.role = role;
-        req.headers.id = id;
-        req.headers.email = email;
+        req.headers.user = user;
 
         next();
 
@@ -65,4 +61,4 @@ const verifyAccessToken = async (req,res,next) => {
     }
 };
 
-module.exports = verifyAccessToken;
+module.exports = studentAccessToken;

@@ -1,10 +1,12 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { signupService, gets, findOne, getByDeleteId, remove, update, getById } = require('../services/user.service')
 
 const createUser = async (req, res) => {
     try {
-        if (req.user.role !== 'admin') {
+        if (req.headers.role !== 'admin') {
+            console.log(req.headers.role);
             return res.status(403).send({ message: 'forbidden access' })
         }
         const user = await signupService(req.body);
@@ -12,10 +14,9 @@ const createUser = async (req, res) => {
             message: "New User Created Successful",
             user: user
         })
-
     }
     catch (err) {
-        // console.log(err);
+        console.log(err);
         res.status(500).json({
             message: err.message
         })
@@ -43,7 +44,7 @@ const getHeads = async (req, res) => {
         const query = req.query;
         const users = await gets(query);
         const heads = users.filter(user => user.role === 'head')
-        // // console.log(head)
+        // console.log(head)
         res.status(200).json({
             heads
         })
@@ -55,6 +56,54 @@ const getHeads = async (req, res) => {
         })
     }
 }
+
+// const loginUser = async (req, res) => {
+//     try {
+//         const { email, password } = req.body;
+
+//         if (!email || email === null) {
+//             return res.status(400).json({ message: "Email is required" });
+//         }
+
+//         if (!password || password === null) {
+//             return res.status(400).json({ message: "Password is required" });
+//         }
+
+//         // const query = { email: email };
+
+//         const user = await findOne({email: email});
+
+//         if (!user) {
+//             return res.status(404).json({ message: "This email is not found!" });
+//         }
+
+//         // const isPasswordMatch = await user.matchPassword(password);
+//         // if (!isPasswordMatch) {
+//         //     return res.status(400).json({ message: "Password is incorrect!" });
+//         // }
+
+//         let matchPassword = await bcrypt.compare(password,user.password);
+//         if(!matchPassword)return res.status(403).json({
+//             status:'fail',
+//             msg : 'password not match'
+//         });  
+
+//         const token =  jwt.sign({user},process.env.ACCESS_TOKEN,"10d");
+
+//         res.json({
+//             message: "User login successful",
+//             user: user,
+//             token  : token
+//         });
+
+//     }
+//     catch (err) {
+//         console.log(err);
+//         res.status(500).json({
+//             message: err.message
+//         })
+//     }
+// }
 
 const loginUser = async (req, res) => {
     try {
@@ -68,36 +117,44 @@ const loginUser = async (req, res) => {
             return res.status(400).json({ message: "Password is required" });
         }
 
-        const query = { email: email };
-        const user = await findOne(query);
+        const user = await findOne({ email: email });
+
         if (!user) {
             return res.status(404).json({ message: "This email is not found!" });
         }
-        const isPasswordMatch = await user.matchPassword(password);
-        if (!isPasswordMatch) {
-            return res.status(400).json({ message: "Password is incorrect!" });
-        }
 
-        const accessToken = await user.createJWT();
+        let matchPassword = await bcrypt.compare(password, user.password);
+        if (!matchPassword) {
+            return res.status(403).json({
+                status: 'fail',
+                msg: 'Password does not match'
+            });
+        }
+        const token = jwt.sign(
+            {id:user._id, role : user.role,email:user.email}, // Payload should be minimal
+            process.env.ACCESS_TOKEN, // Secret key
+            { expiresIn: "10d" } // Options object
+        );
 
         res.json({
             message: "User login successful",
             user: user,
-            accessToken
+            token: token
         });
 
-    }
-    catch (err) {
-        // console.log(err.message);
+    } catch (err) {
+        console.error(err);
         res.status(500).json({
             message: err.message
-        })
+        });
     }
-}
+};
+
+module.exports = loginUser;
+
 
 const getLoggedUser = async (req, res) => {
     try {
-        // // console.log(req.user);
         const user = req.user;
 
         res.status(200).json({
@@ -105,55 +162,13 @@ const getLoggedUser = async (req, res) => {
         })
     }
     catch (err) {
-        // console.log(err.message);
         res.status(500).json({
             message: err.message
         })
     }
 }
 
-// exports.getUserById = async (req, res) => {
-//     try {
-//         const id = req.params.id;
-//         const user = await getById(id);
-//         res.status(200).json({
-//             user
-//         })
-//     }
-//     catch (err) {
-//         // console.log(err);
-//         res.status(500).json({
-//             message: err.message
-//         })
-//     }
-// }
 
-// const updateUserById = async (req, res) => {
-// const id = req.params.id;
-// // console.log(id)
-// const hashPassword = async (password) => {
-//     const salt = await bcrypt.genSalt(10);
-//     password = await bcrypt.hash(password, salt);
-//     return password
-// }
-
-// if (req.body.password) {
-//     req.body.password = await hashPassword(req.body.password)
-// }
-
-// // // console.log(req.body)
-// // // console.log(req.params.id)
-
-
-
-// const user = await User.findOneAndUpdate(id, { password: req.body.password }, { new: true })
-// // console.log("id", user._id)
-// if (!user) return res.status(404).send("Error updating user")
-// // res.status(200).send(user, 'Password update successful')
-// res.status(200).json({
-//     message: "Password update successful"
-// })
-// }
 
 const hashPassword = async (password) => {
     const salt = await bcrypt.genSalt(10);
@@ -167,7 +182,6 @@ const updateUserById = async (req, res) => {
             req.body.password = await hashPassword(req.body.password)
         }
 
-        // // console.log("pass", req.body.password)
 
         const id = req.params.id;
 
@@ -177,9 +191,6 @@ const updateUserById = async (req, res) => {
                 message: "No user found!",
             })
         }
-
-        // console.log("id", id)
-
 
         const options = { new: true };
 
@@ -191,7 +202,6 @@ const updateUserById = async (req, res) => {
         // console.log(user)
     }
     catch (err) {
-        // console.log(err);
         res.status(500).json({
             message: err.message
         })
@@ -203,7 +213,6 @@ const updateUserById = async (req, res) => {
 const deleteUserById = async (req, res) => {
     try {
         const id = req.params.id;
-        // // console.log(id);
 
         const exist = await getByDeleteId(id);
         if (!exist) {

@@ -3,7 +3,7 @@ const { createUser, getUsers, getHeads, loginUser, getLoggedUser, deleteUserById
 const router = express.Router();
 const verifyAccessToken = require('../middleware/user.middleware')
 
-router.post('/users', verifyAccessToken, createUser);
+router.post('/users',verifyAccessToken, createUser);
 
 router.get("/users", getUsers);
 
@@ -15,7 +15,7 @@ router.post("/login", loginUser)
 
 // router.get("/:id", getUserById);
 
-router.patch("/update-pass/:id", updateUserById);
+router.put("/update-pass/:id", updateUserById);
 
 router.delete("/delete-user/:id", deleteUserById);
 

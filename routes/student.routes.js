@@ -13,8 +13,8 @@ router.get("/logged-user", verifyAccessToken, getLoggedUser);
 
 router.post("/student/login", loginStudent)
 
-router.patch("/update-pass/:id", updateUserById);
+router.put("/update-pass/:id", updateUserById);
 
 router.delete("/delete-user/:id", deleteUserById);
 
-module.exports = router;
+module.exports = router; 
