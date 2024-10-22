@@ -44,7 +44,7 @@ const getCourse = async (req, res) => {
     }
 }
 
-const deleteUserById = async (req, res) => {
+const deleteCourseById = async (req, res) => {
     try {
         const id = req.params.id;
         // // console.log(id);
@@ -70,4 +70,4 @@ const deleteUserById = async (req, res) => {
     }
 }
 
-module.exports = { addCourse, getCourse, deleteUserById }
+module.exports = { addCourse, getCourse, deleteCourseById }

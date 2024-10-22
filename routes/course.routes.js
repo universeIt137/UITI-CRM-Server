@@ -1,5 +1,5 @@
 const express = require('express');
-const { addCourse, getCourse, deleteUserById } = require('../controllers/course.controller');
+const { addCourse, getCourse, deleteCourseById } = require('../controllers/course.controller');
 const router = express.Router();
 const verifyAccessToken = require('../middleware/user.middleware')
 
@@ -11,6 +11,6 @@ router.get("/course", getCourse);
 
 // router.put("/update/:id", verifyAccessToken, updateUserById);
 
-router.delete("/delete-course/:id", deleteUserById);
+router.delete("/delete-course/:id", deleteCourseById);
 
 module.exports = router;
