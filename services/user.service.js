@@ -76,11 +76,9 @@ exports.update = async (id, document, options) => {
 exports.getByDeleteId = async (id) => {
     try {
         const user = await User.findById(id);
-        // // console.log(user);
         return user
     }
     catch (err) {
-        // console.log(err)
         throw new Error(err.message);
     }
 }
@@ -91,7 +89,6 @@ exports.remove = async (id) => {
         return lead
     }
     catch (err) {
-        // console.log(err);
         throw new Error(err.message.split(":")[2]);
 
     }

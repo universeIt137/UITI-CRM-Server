@@ -3,10 +3,14 @@ const { collectionHeadAddService, getsAllService, getByDeleteId, remove } = requ
 const addCollectionHead = async (req, res) => {
     try {
         // console.log(req.user);
-        if (req.user.role !== 'admin') {
+        // if (req.user.role !== 'admin') {
+        //     return res.status(403).send({ message: 'forbidden access' })
+        // }
+        // console.log(req.body)
+
+        if (req.headers.role !== 'admin') {
             return res.status(403).send({ message: 'forbidden access' })
         }
-        // console.log(req.body)
         const collectionHead = await collectionHeadAddService(req.body);
 
         res.status(200).json({

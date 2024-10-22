@@ -29,7 +29,8 @@ exports.gets = async () => {
 
 exports.getById = async (id) => {
     try {
-        const student = await Student.findById(id);
+        const student = await Student.findById({id});
+        console.log(student);
         return student
     }
     catch (err) {

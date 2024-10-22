@@ -3,7 +3,7 @@ const {
   addCollection,
   getCollection,
   updateCollectionById,
-  deleteUserById,
+  deleteCollectionById,
 } = require("../controllers/collection.controller");
 const router = express.Router();
 const verifyAccessToken = require("../middleware/user.middleware");
@@ -11,7 +11,7 @@ const verifyAccessToken = require("../middleware/user.middleware");
 router.post("/collection", verifyAccessToken, addCollection);
 
 router.get("/collection", getCollection);
-router.patch("/update-collection/:id", updateCollectionById);
-router.delete("/delete-collection/:id", deleteUserById);
+router.put("/update-collection/:id", updateCollectionById);
+router.delete("/delete-collection/:id", deleteCollectionById);
 
 module.exports = router;

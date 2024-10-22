@@ -21,7 +21,7 @@ const leadSchema = mongoose.Schema({
     secondFollow: {
         type: String
     },
-    thirdtFollow: {
+    thirdFollow: {
         type: String
     },
     nextFollow: {

@@ -9,9 +9,14 @@ const {
 const addCollection = async (req, res) => {
   try {
     // console.log(req.user);
-    if (req.user.role !== "admin") {
+    // if (req.user.role !== "admin") {
+    //   return res.status(403).send({ message: "forbidden access" });
+    // }
+
+    if (req.headers.role !== "admin") {
       return res.status(403).send({ message: "forbidden access" });
     }
+
     const collection = await collectionAddService(req.body);
 
     res.status(200).json({
@@ -69,7 +74,7 @@ const updateCollectionById = async (req, res) => {
   }
 };
 
-const deleteUserById = async (req, res) => {
+const deleteCollectionById = async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -77,13 +82,13 @@ const deleteUserById = async (req, res) => {
 
     if (!exist) {
       return res.status(404).json({
-        message: "No user found!",
+        message: "No collection found!",
       });
     }
 
     const lead = await remove(id);
     res.status(200).json({
-      message: "User delete successful",
+      message: "Collection delete successful",
       lead,
     });
   } catch (err) {
@@ -98,5 +103,5 @@ module.exports = {
   addCollection,
   getCollection,
   updateCollectionById,
-  deleteUserById,
+  deleteCollectionById,
 };

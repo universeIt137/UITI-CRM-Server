@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const { signupService, gets, findOne, getByDeleteId, remove, update, getById } = require('../services/student.service');
-const Student = require('../models/student.model');
+const StudentModel = require('../models/student.model');
+const jwt = require("jsonwebtoken")
 
 const createStudent = async (req, res) => {
     try {
@@ -35,10 +36,49 @@ const getStudents = async (req, res) => {
     }
 }
 
+// const loginStudent = async (req, res) => {
+//     try {
+//         const { email, password } = req.body;
+//         // console.log(email, password)
+
+//         if (!email || email === null) {
+//             return res.status(400).json({ message: "Email is required" });
+//         }
+
+//         if (!password || password === null) {
+//             return res.status(400).json({ message: "Password is required" });
+//         }
+
+//         const query = { email: email };
+//         const student = await findOne(query);
+//         if (!student) {
+//             return res.status(404).json({ message: "This email is not found!" });
+//         }
+//         const isPasswordMatch = await student.matchPassword(password);
+//         if (!isPasswordMatch) {
+//             return res.status(400).json({ message: "Password is incorrect!" });
+//         }
+
+//         const accessToken = await student.createJWT();
+
+//         res.json({
+//             message: "Student login successful",
+//             student: student,
+//             accessToken
+//         });
+
+//     }
+//     catch (err) {
+//         // console.log(err.message);
+//         res.status(500).json({
+//             message: err.message
+//         })
+//     }
+// }
 const loginStudent = async (req, res) => {
+
     try {
         const { email, password } = req.body;
-        // console.log(email, password)
 
         if (!email || email === null) {
             return res.status(400).json({ message: "Email is required" });
@@ -48,32 +88,40 @@ const loginStudent = async (req, res) => {
             return res.status(400).json({ message: "Password is required" });
         }
 
-        const query = { email: email };
-        const student = await findOne(query);
+        const student = await StudentModel.findOne({ email: email });
+
         if (!student) {
             return res.status(404).json({ message: "This email is not found!" });
         }
-        const isPasswordMatch = await student.matchPassword(password);
-        if (!isPasswordMatch) {
-            return res.status(400).json({ message: "Password is incorrect!" });
-        }
 
-        const accessToken = await student.createJWT();
+        let matchPassword = await bcrypt.compare(password, student.password);
+        if (!matchPassword) {
+            return res.status(403).json({
+                status: 'fail',
+                msg: 'Password does not match'
+            });
+        }
+        const token = jwt.sign(
+            {student:student}, // Payload should be minimal
+            process.env.ACCESS_TOKEN, // Secret key
+            { expiresIn: "10d" } // Options object
+        );
 
         res.json({
-            message: "Student login successful",
+            message: "student login successfully",
             student: student,
-            accessToken
+            token: token
         });
 
-    }
-    catch (err) {
-        // console.log(err.message);
+    } catch (err) {
+        console.error(err);
         res.status(500).json({
             message: err.message
-        })
+        });
     }
-}
+};
+
+
 
 const getLoggedUser = async (req, res) => {
     try {
