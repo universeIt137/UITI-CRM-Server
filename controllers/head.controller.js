@@ -3,9 +3,14 @@ const { headAddService, getsAllService, getByDeleteId, remove } = require('../se
 const addHead = async (req, res) => {
     try {
         // // console.log(req.user);
-        if (req.user.role !== 'admin') {
+        // if (req.user.role !== 'admin') {
+        //     return res.status(403).send({ message: 'forbidden access' })
+        // }
+
+        if (req.headers.role !== 'admin') {
             return res.status(403).send({ message: 'forbidden access' })
         }
+
         const lead = await headAddService(req.body);
         res.status(200).json({
             message: "New Head Added Successfully",
