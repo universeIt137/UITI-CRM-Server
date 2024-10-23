@@ -1,5 +1,5 @@
 const express = require('express');
-const { addCollectionHead, getCollectionHead, deleteUserById } = require('../controllers/collection.head.controller');
+const { addCollectionHead, getCollectionHead, deleteCollectionById } = require('../controllers/collection.head.controller');
 const router = express.Router();
 const verifyAccessToken = require('../middleware/user.middleware')
 
