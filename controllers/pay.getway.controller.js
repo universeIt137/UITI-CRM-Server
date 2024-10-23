@@ -3,7 +3,10 @@ const { payGetwayAddService, getsAllService, getByDeleteId, remove } = require('
 const addPayGetWay = async (req, res) => {
     try {
         // console.log(req.user);
-        if (req.user.role !== 'admin') {
+        // if (req.user.role !== 'admin') {
+        //     return res.status(403).send({ message: 'forbidden access' })
+        // }
+        if (req.headers.role !== 'admin') {
             return res.status(403).send({ message: 'forbidden access' })
         }
         const lead = await payGetwayAddService(req.body);
@@ -37,7 +40,7 @@ const getPayGetWay = async (req, res) => {
     }
 }
 
-const deleteUserById = async (req, res) => {
+const deletePayGetWayById = async (req, res) => {
     try {
         const id = req.params.id;
         // // console.log(id);
@@ -63,4 +66,4 @@ const deleteUserById = async (req, res) => {
     }
 }
 
-module.exports = { addPayGetWay, getPayGetWay, deleteUserById }
+module.exports = { addPayGetWay, getPayGetWay, deletePayGetWayById}
