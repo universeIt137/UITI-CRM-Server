@@ -141,10 +141,6 @@ const getLoggedUser = async (req, res) => {
     }
 }
 
-
-
-
-
 const getStudentById = async (req, res) => {
     try {
         const id = req.params.id ;
@@ -195,7 +191,7 @@ const hashPassword = async (password) => {
     return password
 }
 
-const updateUserById = async (req, res) => {
+const updateStudentById = async (req, res) => {
     try {
         if (req.body.password) {
             req.body.password = await hashPassword(req.body.password)
@@ -204,6 +200,8 @@ const updateUserById = async (req, res) => {
         // // console.log("pass", req.body.password)
 
         const id = req.params.id;
+
+        console.log(id)
 
         const exist = await getById(id);
         if (!exist) {
@@ -234,7 +232,7 @@ const updateUserById = async (req, res) => {
 
 }
 
-const deleteUserById = async (req, res) => {
+const deleteStudentById = async (req, res) => {
     try {
         const id = req.params.id;
         // // console.log(id);
@@ -248,7 +246,7 @@ const deleteUserById = async (req, res) => {
 
         const lead = await remove(id);
         res.status(200).json({
-            message: "User delete successful",
+            message: "Student delete successful",
             lead
         })
     }
@@ -260,4 +258,4 @@ const deleteUserById = async (req, res) => {
     }
 }
 
-module.exports = { createStudent, getStudents, getStudentById, loginStudent, getLoggedUser, deleteUserById, updateUserById }
+module.exports = { createStudent, getStudents, getStudentById, loginStudent, getLoggedUser, deleteStudentById, updateStudentById }

@@ -75,7 +75,7 @@ exports.update = async (id, document, options) => {
 
 exports.getByDeleteId = async (id) => {
     try {
-        const user = await Student.findById(id);
+        const user = await Student.findById({_id : id});
         // // console.log(user);
         return user
     }

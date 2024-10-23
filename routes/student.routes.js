@@ -1,5 +1,5 @@
 const express = require('express');
-const { createStudent, getStudents, getStudentById, loginStudent, getLoggedUser, deleteUserById, updateUserById } = require('../controllers/student.controller');
+const { createStudent, getStudents, getStudentById, loginStudent, getLoggedUser, deleteStudentById, updateStudentById } = require('../controllers/student.controller');
 const router = express.Router();
 const verifyAccessToken = require('../middleware/user.middleware')
 
@@ -13,8 +13,8 @@ router.get("/logged-user", verifyAccessToken, getLoggedUser);
 
 router.post("/student/login", loginStudent)
 
-router.put("/update-pass/:id", updateUserById);
+router.put("/update-pass-student/:id", updateStudentById);
 
-router.delete("/delete-user/:id", deleteUserById);
+router.delete("/delete-student/:id", deleteStudentById);
 
 module.exports = router; 
