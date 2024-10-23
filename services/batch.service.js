@@ -18,7 +18,7 @@ exports.getsAllService = async (document) => {
 
 exports.getByDeleteId = async (id) => {
     try {
-        const user = await Batch.findById(id);
+        const user = await Batch.findById({ _id: id });
         // // console.log(user);
         return user
     }

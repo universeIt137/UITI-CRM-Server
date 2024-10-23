@@ -42,21 +42,23 @@ const getBatch = async (req, res) => {
     }
 }
 
-const deleteUserById = async (req, res) => {
+const deleteBatchById = async (req, res) => {
     try {
         const id = req.params.id;
+
+        console.log(id);
         // // console.log(id);
 
         const exist = await getByDeleteId(id);
         if (!exist) {
             return res.status(404).json({
-                message: "No user found!",
+                message: "No batch found!",
             })
         }
 
         const lead = await remove(id);
         res.status(200).json({
-            message: "User delete successful",
+            message: "Batch delete successful",
             lead
         })
     }
@@ -68,4 +70,4 @@ const deleteUserById = async (req, res) => {
     }
 }
 
-module.exports = { addBatch, getBatch, deleteUserById }
+module.exports = { addBatch, getBatch, deleteBatchById }
