@@ -143,7 +143,7 @@ const getLoggedUser = async (req, res) => {
 
 const getStudentById = async (req, res) => {
     try {
-        const id = new mongoose.Types.ObjectId(req.params.id) ;
+        const id = req.params.id ;
         console.log(id)
         const student = await getById(id);
         res.status(200).json({
