@@ -152,10 +152,24 @@ module.exports = loginUser;
 
 const getLoggedUser = async (req, res) => {
     try {
-        const user = req.user;
+        // const user = req.user;
+
+        const id = req.headers.id;
+
+        console.log(id)
+
+        let filter = {_id : id};
+
+        const userData = await User.findById(filter);
+
+        if (!userData) {
+            return res.status(404).json({
+                message: "No user found!",
+            })
+        };
 
         res.status(200).json({
-            user: user
+            user: userData
         })
     }
     catch (err) {
