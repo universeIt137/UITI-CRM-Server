@@ -11,6 +11,6 @@ router.get("/collection-head", getCollectionHead);
 
 // router.put("/update/:id", verifyAccessToken, updateUserById);
 
-router.delete("/delete-collection-head/:id", deleteUserById);
+router.delete("/delete-collection-head/:id", deleteCollectionById);
 
 module.exports = router;

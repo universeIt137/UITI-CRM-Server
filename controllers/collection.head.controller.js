@@ -43,20 +43,20 @@ const getCollectionHead = async (req, res) => {
     }
 }
 
-const deleteUserById = async (req, res) => {
+const deleteCollectionById = async (req, res) => {
     try {
         const id = req.params.id;
 
         const exist = await getByDeleteId(id);
         if (!exist) {
             return res.status(404).json({
-                message: "No user found!",
+                message: "No collection found!",
             })
         }
 
         const lead = await remove(id);
         res.status(200).json({
-            message: "User delete successful",
+            message: "Collection delete successful",
             lead
         })
     }
@@ -68,4 +68,4 @@ const deleteUserById = async (req, res) => {
     }
 }
 
-module.exports = { addCollectionHead, getCollectionHead, deleteUserById }
+module.exports = { addCollectionHead, getCollectionHead, deleteCollectionById }
