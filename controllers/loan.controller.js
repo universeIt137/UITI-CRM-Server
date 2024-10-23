@@ -41,7 +41,7 @@ const getLoan = async (req, res) => {
     }
 }
 
-const deleteUserById = async (req, res) => {
+const deleteLoanById = async (req, res) => {
     try {
         const id = req.params.id;
 
@@ -126,4 +126,4 @@ const updateLoanProPayById = async (req, res) => {
 }
 
 
-module.exports = { addLoan, getLoan, deleteUserById, updateLoanPayById, updateLoanProPayById }
+module.exports = { addLoan, getLoan, deleteLoanById, updateLoanPayById, updateLoanProPayById }
