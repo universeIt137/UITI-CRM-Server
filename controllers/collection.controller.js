@@ -54,7 +54,7 @@ const updateCollectionById = async (req, res) => {
 
     if (!exist) {
       return res.status(404).json({
-        message: "No user found!",
+        message: "No collection found!",
       });
     }
 
@@ -63,7 +63,7 @@ const updateCollectionById = async (req, res) => {
     const lead = await UpdateById(id, update);
 
     res.status(200).json({
-      message: "User update successful",
+      message: "Collection update successful",
       lead,
     });
   } catch (err) {
