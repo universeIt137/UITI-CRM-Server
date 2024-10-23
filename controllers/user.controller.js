@@ -43,13 +43,11 @@ const getHeads = async (req, res) => {
         const query = req.query;
         const users = await gets(query);
         const heads = users.filter(user => user.role === 'head')
-        // console.log(head)
         res.status(200).json({
             heads
         })
     }
     catch (err) {
-        // console.log(err);
         res.status(500).json({
             message: err.message
         })
