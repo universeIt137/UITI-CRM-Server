@@ -48,13 +48,13 @@ const deletePayGetWayById = async (req, res) => {
         const exist = await getByDeleteId(id);
         if (!exist) {
             return res.status(404).json({
-                message: "No user found!",
+                message: "No PayGetWay found!",
             })
         }
 
         const lead = await remove(id);
         res.status(200).json({
-            message: "User delete successful",
+            message: "PayGetWay delete successful",
             lead
         })
     }
