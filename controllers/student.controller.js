@@ -1,7 +1,8 @@
 const bcrypt = require('bcryptjs');
 const { signupService, gets, findOne, getByDeleteId, remove, update, getById } = require('../services/student.service');
 const StudentModel = require('../models/student.model');
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const { default: mongoose } = require('mongoose');
 
 const createStudent = async (req, res) => {
     try {
@@ -140,9 +141,10 @@ const getLoggedUser = async (req, res) => {
     }
 }
 
-const getUserById = async (req, res) => {
+const getStudentById = async (req, res) => {
     try {
-        const id = req.params.id;
+        const id = new mongoose.Types.ObjectId(req.params.id) ;
+        console.log(id)
         const student = await getById(id);
         res.status(200).json({
             student
@@ -254,4 +256,4 @@ const deleteUserById = async (req, res) => {
     }
 }
 
-module.exports = { createStudent, getStudents, getUserById, loginStudent, getLoggedUser, deleteUserById, updateUserById }
+module.exports = { createStudent, getStudents, getStudentById, loginStudent, getLoggedUser, deleteUserById, updateUserById }
