@@ -52,7 +52,7 @@ const deleteCourseById = async (req, res) => {
         const exist = await getByDeleteId(id);
         if (!exist) {
             return res.status(404).json({
-                message: "No user found!",
+                message: "No course found!",
             })
         }
 

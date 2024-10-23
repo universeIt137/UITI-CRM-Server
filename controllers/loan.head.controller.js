@@ -57,7 +57,7 @@ const deleteLoanHeadById = async (req, res) => {
 
         const lead = await remove(id);
         res.status(200).json({
-            message: "Loan delete successful",
+            message: "Loan head delete successful",
             lead
         })
     }

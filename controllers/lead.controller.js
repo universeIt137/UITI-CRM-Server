@@ -121,9 +121,14 @@ const addLeads = async (req, res) => {
 
 const addOnlineLeads = async (req, res) => {
   try {
-    if (req.user.role !== "admin") {
+    // if (req.user.role !== "admin") {
+    //   return res.status(403).send({ message: "forbidden access" });
+    // }
+
+    if (req.headers.role !== "admin") {
       return res.status(403).send({ message: "forbidden access" });
     }
+
     const { leads, courseName, batchName, employeeName, headName } = req.body;
 
     const courseDetails = await courseModel.findById(courseName);
