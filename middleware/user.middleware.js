@@ -52,6 +52,7 @@ const verifyAccessToken = async (req,res,next) => {
         const id = decodeToken.id;
 
         req.headers.role = role;
+        console.log(role);
         req.headers.id = id;
         req.headers.email = email;
 

@@ -13,8 +13,10 @@ const addCourse = async (req, res) => {
 
 
 
+
         const course = await courseAddService(req.body);
         res.status(200).json({
+            status: 'success',
             message: "New Course Added Successfully",
             course: course
         })
