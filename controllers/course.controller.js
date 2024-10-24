@@ -35,6 +35,7 @@ const getCourse = async (req, res) => {
         const query = req.query;
         const users = await getsAllService(query);
         res.status(200).json({
+            status : "success",
             users
         })
     }
