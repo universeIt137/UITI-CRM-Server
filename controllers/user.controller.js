@@ -5,10 +5,10 @@ const { signupService, gets, findOne, getByDeleteId, remove, update, getById } =
 
 const createUser = async (req, res) => {
     try {
-        if (req.headers.role !== 'admin') {
-            console.log(req.headers.role);
-            return res.status(403).send({ message: 'forbidden access' })
-        }
+        // if (req.headers.role !== 'admin') {
+        //     console.log(req.headers.role);
+        //     return res.status(403).send({ message: 'forbidden access' })
+        // }
         const user = await signupService(req.body);
         res.status(200).json({
             message: "New User Created Successful",
