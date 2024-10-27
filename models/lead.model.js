@@ -41,7 +41,7 @@ const leadSchema = mongoose.Schema({
             type: String,
             required: true
         },
-        id: {
+        _id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Head',
             // required: true
@@ -52,7 +52,7 @@ const leadSchema = mongoose.Schema({
             type: String,
             required: true
         },
-        id: {
+        _id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
             // required: true
@@ -63,7 +63,7 @@ const leadSchema = mongoose.Schema({
             type: String,
             required: true
         },
-        id: {
+        _id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Course',
             // required: true
