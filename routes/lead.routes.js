@@ -13,7 +13,7 @@ router.post('/add-leads', verifyAccessToken, addLeads);
 router.post('/add-online-leads', verifyAccessToken, addOnlineLeads);
 router.post('/add-offline-leads', verifyAccessToken, addOfflineLeads);
 
-router.post('/add-admissions', verifyAccessToken, addAdmissions);
+router.post('/add-admissions', verifyAccessToken ,addAdmissions);
 
 router.get("/leads", getLeads);
 
