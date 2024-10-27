@@ -42,7 +42,7 @@ const leadSchema = mongoose.Schema({
             required: true
         },
         _id: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             ref: 'Head',
             // required: true
         }
@@ -53,7 +53,7 @@ const leadSchema = mongoose.Schema({
             required: true
         },
         _id: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             ref: 'User',
             // required: true
         }
@@ -64,7 +64,7 @@ const leadSchema = mongoose.Schema({
             required: true
         },
         _id: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             ref: 'Course',
             // required: true
         }
@@ -76,7 +76,7 @@ const leadSchema = mongoose.Schema({
             required: true
         },
         id: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             ref: 'Batch',
             required: true
         }
@@ -87,7 +87,7 @@ const leadSchema = mongoose.Schema({
             // required: true
         },
         id: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             ref: 'Batch',
             // required: true
         }
