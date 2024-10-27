@@ -16,7 +16,7 @@ const Lead = require("../models/lead.model");
 
 const addLeads = async (req, res) => {
   try {
-    if (req.user.role !== "admin") {
+    if (req.headers.role !== "admin") {
       return res.status(403).send({ message: "forbidden access" });
     }
     const { leads, courseName, batchName, employeeName, headName } = req.body;
