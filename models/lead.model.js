@@ -1,195 +1,86 @@
-const { default: mongoose } = require('mongoose');
+const mongoose = require('mongoose');
+const { Schema, model } = mongoose;
 
-const leadSchema = mongoose.Schema({
+const leadSchema = new Schema(
+  {
     name: {
-        type: String,
-        required: [true, "Lead Name is required"],
+      type: String,
+      required: [true, "Lead Name is required"],
     },
     phone: {
-        type: String,
-        required: [true, "Lead Phone Number is required"],
-        unique: true
+      type: String,
+      required: [true, "Lead Phone Number is required"],
+      unique: true,
     },
     email: {
-        type: String,
-        // required: [true, "Lead Email is required"],
-        // unique: truew
+      type: String,
+      validate: {
+        validator: (v) =>
+          /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
+        message: "Invalid email format",
+      },
     },
-    firstFollow: {
-        type: String
-    },
-    secondFollow: {
-        type: String
-    },
-    thirdFollow: {
-        type: String
-    },
-    nextFollow: {
-        type: String
-    },
-    remark: {
-        type: String
-    },
-    remarkTwo: {
-        type: String
-    },
-    admissionStatus: {
-        type: String
-    },
+    firstFollow: String,
+    secondFollow: String,
+    thirdFollow: String,
+    nextFollow: String,
+    remark: String,
+    remarkTwo: String,
+    admissionStatus: String,
+
     head: {
-        name: {
-            type: String,
-            required: true
-        },
-        _id: {
-            type: String,
-            ref: 'Head',
-            // required: true
-        }
+      name: { type: String, required: true },
+      id: { type: mongoose.Schema.Types.ObjectId, ref: "Head" },
     },
     user: {
-        name: {
-            type: String,
-            required: true
-        },
-        _id: {
-            type: String,
-            ref: 'User',
-            // required: true
-        }
+      name: { type: String, required: true },
+      id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     },
     course: {
-        name: {
-            type: String,
-            required: true
-        },
-        _id: {
-            type: String,
-            ref: 'Course',
-            // required: true
-        }
-
+      name: { type: String, required: true },
+      id: { type: mongoose.Schema.Types.ObjectId, ref: "Course" },
     },
     batch: {
-        name: {
-            type: String,
-            required: true
-        },
-        id: {
-            type: String,
-            ref: 'Batch',
-            required: true
-        }
+      name: { type: String, required: true },
+      id: { type: mongoose.Schema.Types.ObjectId, ref: "Batch", required: true },
     },
     preBatch: {
-        name: {
-            type: String,
-            // required: true
-        },
-        id: {
-            type: String,
-            ref: 'Batch',
-            // required: true
-        }
-    },
-    admission: {
-        type: Boolean
-    },
-    close: {
-        type: Boolean
-    },
-    onlineInterested: {
-        type: Boolean
-    },
-    offlineInterested: {
-        type: Boolean
-    },
-    seminarInterested: {
-        type: Boolean
-    },
-    noReceive: {
-        type: Boolean
-    },
-    seminarAttend: {
-        type: Boolean
-    },
-    closePayment: {
-        type: Boolean
+      name: String,
+      id: { type: mongoose.Schema.Types.ObjectId, ref: "Batch" },
     },
 
-    admissionFee: {
-        type: Number,
-        // required: true
-    },
+    admission: { type: Boolean, default: false },
+    close: { type: Boolean, default: false },
+    onlineInterested: { type: Boolean, default: false },
+    offlineInterested: { type: Boolean, default: false },
+    seminarInterested: { type: Boolean, default: false },
+    noReceive: { type: Boolean, default: false },
+    seminarAttend: { type: Boolean, default: false },
+    closePayment: { type: Boolean, default: false },
 
-    fristInstallment: {
-        type: Number,
-        // required: true
-    },
-    fristPaymentAccounts: {
-        type: String,
-        // required: true
-    },
-    fristInstallmentTID: {
-        type: String,
-        // required: true
-    },
-    fristInstallmentDate: {
-        type: String,
-        // required: true
-    },
+    admissionFee: Number,
 
-    secondInstallment: {
-        type: Number,
-        // required: true
-    },
-    secondPaymentAccounts: {
-        type: String,
-        // required: true
-    },
-    secondInstallmentTID: {
-        type: String,
-        // required: true
-    },
-    secondInstallmentDate: {
-        type: String,
-        // required: true
-    },
+    firstInstallment: Number,
+    firstPaymentAccounts: String,
+    firstInstallmentTID: String,
+    firstInstallmentDate: { type: Date },
 
-    thirdInstallment: {
-        type: Number,
-        // required: true
-    },
-    thirdPaymentAccounts: {
-        type: String,
-        // required: true
-    },
-    thirdInstallmentTID: {
-        type: String,
-        // required: true
-    },
-    thirdInstallmentDate: {
-        type: String,
-        // required: true
-    },
+    secondInstallment: Number,
+    secondPaymentAccounts: String,
+    secondInstallmentTID: String,
+    secondInstallmentDate: { type: Date },
 
-    nextInstallmentDate: {
-        type: String,
-        // required: true
-    },
+    thirdInstallment: Number,
+    thirdPaymentAccounts: String,
+    thirdInstallmentTID: String,
+    thirdInstallmentDate: { type: Date },
 
-    totalInstallment: {
-        type: Number,
-        // required: true
-    },
-    discription:{
-        type: String,
-    }
-}, {
-    timestamps: true
-})
+    nextInstallmentDate: { type: Date },
+    totalInstallment: Number,
+    description: String,
+  },
+  { timestamps: true }
+);
 
-
-const Lead = mongoose.model("Lead", leadSchema);
-
+const Lead = model("Lead", leadSchema);
 module.exports = Lead;

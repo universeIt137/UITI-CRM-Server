@@ -13,6 +13,7 @@ const {
   remove,
 } = require("../services/lead.service");
 const Lead = require("../models/lead.model");
+const { default: mongoose } = require("mongoose");
 
 const addLeads = async (req, res) => {
   try {
@@ -327,12 +328,13 @@ const addAdmissions = async (req, res) => {
       employeeName,
       headName,
     } = req.body;
-
+    const employId = new mongoose.Types.ObjectId(employeeName)
     const courseDetails = await courseModel.findById(courseName);
     const batchDetails = await batchModel.findById(batchName);
-    const employeeDetails = await User.findById(employeeName);
-    // const headDetails = await headModel.findById(headName);
-    const headDetails = await User.findById(headName);
+    const employeeDetails = await userModel.findById(employId);
+    const headDetails = await headModel.findById(headName);
+    console.log(headDetails);
+    // const headDetails = await userModel.findById(headName);
 
     const lead = {
       name,
@@ -364,19 +366,19 @@ const addAdmissions = async (req, res) => {
       totalInstallment,
       head: {
         name: headDetails.name,
-        id: headDetails._id,
+        id: new mongoose.Types.ObjectId(headDetails._id),
       },
       user: {
         name: employeeDetails.name,
-        id: employeeDetails._id,
+        id: new mongoose.Types.ObjectId(employeeDetails._id),
       },
       course: {
         name: courseDetails.name,
-        id: courseDetails._id,
+        id: new mongoose.Types.ObjectId(courseDetails._id),
       },
       batch: {
         name: batchDetails.name,
-        id: batchDetails._id,
+        id: new mongoose.Types.ObjectId(batchDetails._id) ,
       },
     };
     // // console.log(lead)
@@ -389,7 +391,7 @@ const addAdmissions = async (req, res) => {
       // success, error
     });
   } catch (err) {
-    // // console.log(err);
+    console.log(err);
     res.status(500).json({
       message: err.message,
     });
