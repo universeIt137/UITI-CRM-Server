@@ -212,7 +212,7 @@ const addOnlineLeads = async (req, res) => {
 
 const addOfflineLeads = async (req, res) => {
   try {
-    if (req.user.role !== "admin") {
+    if (req.headers.role !== "admin") {
       return res.status(403).send({ message: "forbidden access" });
     }
     const { leads, courseName, batchName, employeeName, headName } = req.body;
@@ -297,7 +297,7 @@ const addOfflineLeads = async (req, res) => {
 
 const addAdmissions = async (req, res) => {
   try {
-    if (req.user.role !== "admin") {
+    if (req.headers.role !== "admin") {
       return res.status(403).send({ message: "forbidden access" });
     }
 
