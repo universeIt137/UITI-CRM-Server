@@ -36,7 +36,7 @@ const addLeads = async (req, res) => {
         email: lead?.Email,
         firstFollow: lead.FirstFollowup,
         secondFollow: lead.SecondFollowup,
-        thirdtFollow: lead.ThirdFollowup,
+        thirdFollow: lead.ThirdFollowup,
         nextFollow: lead.NextFollow,
         remark: lead.Remark,
         remarkTwo: lead.RemarkTwo,
@@ -65,19 +65,19 @@ const addLeads = async (req, res) => {
 
         head: {
           name: headDetails.name,
-          id: headDetails._id,
+          id: new mongoose.Types.ObjectId(headDetails._id),
         },
         user: {
           name: employeeDetails.name,
-          id: employeeDetails._id,
+          id: new mongoose.Types.ObjectId(employeeDetails._id) ,
         },
         course: {
           name: courseDetails.name,
-          id: courseDetails._id,
+          id: new mongoose.Types.ObjectId(courseDetails._id) ,
         },
         batch: {
           name: batchDetails.name,
-          id: batchDetails._id,
+          id: new mongoose.Types.ObjectId(batchDetails._id) ,
         },
       };
     });
@@ -146,7 +146,7 @@ const addOnlineLeads = async (req, res) => {
         email: lead.Email,
         firstFollow: lead.FirstFollowup,
         secondFollow: lead.SecondFollowup,
-        thirdtFollow: lead.ThirdFollowup,
+        thirdFollow: lead.ThirdFollowup,
         nextFollow: lead.NextFollow,
         remark: lead.Remark,
         remarkTwo: lead.RemarkTwo,
@@ -154,19 +154,19 @@ const addOnlineLeads = async (req, res) => {
 
         head: {
           name: headDetails.name,
-          id: headDetails._id,
+          id: new mongoose.Types.ObjectId(headDetails._id),
         },
         user: {
           name: employeeDetails.name,
-          id: employeeDetails._id,
+          id: new mongoose.Types.ObjectId(employeeDetails._id) ,
         },
         course: {
           name: courseDetails.name,
-          id: courseDetails._id,
+          id: new mongoose.Types.ObjectId(courseDetails._id) ,
         },
         batch: {
           name: batchDetails.name,
-          id: batchDetails._id,
+          id: new mongoose.Types.ObjectId(batchDetails._id),
         },
         onlineInterested: true,
       };
@@ -231,7 +231,7 @@ const addOfflineLeads = async (req, res) => {
         email: lead.Email,
         firstFollow: lead.FirstFollowup,
         secondFollow: lead.SecondFollowup,
-        thirdtFollow: lead.ThirdFollowup,
+        thirdFollow: lead.ThirdFollowup,
         nextFollow: lead.NextFollow,
         remark: lead.Remark,
         remarkTwo: lead.RemarkTwo,
@@ -239,11 +239,11 @@ const addOfflineLeads = async (req, res) => {
 
         head: {
           name: headDetails.name,
-          id: headDetails._id,
+          id: new mongoose.Types.ObjectId(headDetails._id) ,
         },
         user: {
           name: employeeDetails.name,
-          id: employeeDetails._id,
+          id: new mongoose.Types.ObjectId(employeeDetails._id),
         },
         course: {
           name: courseDetails.name,
@@ -251,7 +251,7 @@ const addOfflineLeads = async (req, res) => {
         },
         batch: {
           name: batchDetails.name,
-          id: batchDetails._id,
+          id: new mongoose.Types.ObjectId(batchDetails._id) ,
         },
         offlineInterested: true,
       };
@@ -306,34 +306,40 @@ const addAdmissions = async (req, res) => {
       name,
       email,
       phone,
+
       admission,
       admissionFee,
       admissionStatus,
-      fristInstallment,
-      fristPaymentAccounts,
-      fristInstallmentTID,
-      fristInstallmentDate,
+
+      firstInstallment,
+      firstPaymentAccounts,
+      firstInstallmentTID,
+      firstInstallmentDate,
+
       secondInstallment,
       secondPaymentAccounts,
       secondInstallmentTID,
       secondInstallmentDate,
+
       thirdInstallment,
       thirdPaymentAccounts,
       thirdInstallmentTID,
       thirdInstallmentDate,
+
       nextInstallmentDate,
       totalInstallment,
+
       courseName,
       batchName,
       employeeName,
       headName,
+      
     } = req.body;
-    const employId = new mongoose.Types.ObjectId(employeeName)
+    const employId = (employeeName)
     const courseDetails = await courseModel.findById(courseName);
     const batchDetails = await batchModel.findById(batchName);
     const employeeDetails = await userModel.findById(employId);
     const headDetails = await headModel.findById(headName);
-    console.log(headDetails);
     // const headDetails = await userModel.findById(headName);
 
     const lead = {
@@ -344,10 +350,10 @@ const addAdmissions = async (req, res) => {
       admissionFee,
       admissionStatus,
 
-      fristInstallment,
-      fristPaymentAccounts,
-      fristInstallmentTID,
-      fristInstallmentDate,
+      firstInstallment,
+      firstPaymentAccounts,
+      firstInstallmentTID,
+      firstInstallmentDate,
 
       secondInstallment,
       secondPaymentAccounts,
@@ -502,10 +508,10 @@ const updateAddPayById = async (req, res) => {
         id: req.body.batchId,
       },
 
-      fristInstallment: req.body.fristInstallment,
-      fristInstallmentDate: req.body.fristInstallmentDate,
-      fristInstallmentTID: req.body.fristInstallmentTID,
-      fristPaymentAccounts: req.body.fristPaymentAccounts,
+      firstInstallment: req.body.firstInstallment,
+      firstInstallmentDate: req.body.firstInstallmentDate,
+      firstInstallmentTID: req.body.firstInstallmentTID,
+      firstPaymentAccounts: req.body.firstPaymentAccounts,
 
       nextInstallmentDate: req.body.nextInstallmentDate,
       preBatch: req.body.preBatch,
