@@ -3,9 +3,9 @@ const { createUser, getUsers, getHeads, loginUser, getLoggedUser, deleteUserById
 const router = express.Router();
 const verifyAccessToken = require('../middleware/user.middleware')
 
-router.post('/users',verifyAccessToken, createUser);
+router.post('/users', createUser);
 
-router.get("/users", getUsers);
+router.get("/users",verifyAccessToken, getUsers);
 
 router.get("/heads", getHeads);
 
